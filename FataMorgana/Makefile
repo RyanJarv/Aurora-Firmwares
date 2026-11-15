@@ -35,6 +35,11 @@ DIST_DIR = dist
 SYSTEM_FILES_DIR = $(LIBDAISY_DIR)/core
 include $(SYSTEM_FILES_DIR)/Makefile
 
+# Keep RAM objects and binaries separate from the QSPI build.
+.PHONY: ram
+ram:
+	$(MAKE) APP_TYPE=BOOT_SRAM BUILD_DIR=build-ram all
+
 # Distribution target - creates versioned binary in dist/
 .PHONY: dist clean-dist
 

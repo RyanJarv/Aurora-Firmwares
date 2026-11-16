@@ -168,9 +168,6 @@ separate checkout, pass `AURORA_SDK_PATH=/path/to/Aurora-SDK` to `make ram`.
 
 USB host support has known issues in `BOOT_SRAM`, so custom USB wavetable
 loading may fail. The installation steps below apply to the default QSPI build.
-The [AuroraSwitch RAM experiment](https://aurora-switch.ryanjarv.sh/fatamorgana-ram-experiment.html)
-requires a byte-for-byte match with its catalog entry. Follow its pinned build
-instructions when building firmware for that selector.
 
 ## Installation
 

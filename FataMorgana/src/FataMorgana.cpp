@@ -38,6 +38,16 @@
  *  - Load 8 WAV files (1.wav - 8.wav) to populate the wave cube
  *  - Each file: 16-bit mono, 256 samples/wave, 64 waves (8x8 grid)
  */
+#include "daisy_seed.h"
+#include "fatfs.h"
+
+namespace aurora
+{
+// The SDK defines this object in aurora.h. Place its sector cache in D2 SRAM
+// before that definition so PrepareMedia and f_mount share a DMA-safe object.
+extern daisy::FatFSInterface DMA_BUFFER_MEM_SECTION fatfs_interface;
+}
+
 #include "aurora.h"
 #include "daisysp.h"
 #include "Effects/bitcrush.h"
@@ -58,7 +68,7 @@ Hardware hw;
 // Wave Cube Instance (in SDRAM) and DMA Buffer
 // ============================================================================
 wavetable::WaveCube wavetable::wave_cube DSY_SDRAM_BSS;
-uint8_t DMA_BUFFER_MEM_SECTION wavetable::g_sector_buf[wavetable::SECTOR_SIZE];
+alignas(32) uint8_t DMA_BUFFER_MEM_SECTION wavetable::g_sector_buf[wavetable::SECTOR_SIZE];
 
 // ============================================================================
 // Oscillators

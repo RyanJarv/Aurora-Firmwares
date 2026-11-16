@@ -8,8 +8,6 @@ VERSION_PATCH = 0
 VERSION = $(VERSION_MAJOR).$(VERSION_MINOR).$(VERSION_PATCH)
 
 # Build Project for Daisy Bootloader
-# Retain the upstream QSPI default. The original alpha reported USB host
-# trouble in SRAM mode without documenting the setup or symptom.
 APP_TYPE = BOOT_QSPI
 
 # Sources

@@ -77,8 +77,9 @@ struct ChunkHeader
 // Logging (must be before LoadWavFile)
 // ============================================================================
 
-// Global log file handle to avoid repeated open/close
-static FIL g_log_file;
+// FatFs transfers the private sector buffer in FIL directly over USB.
+static FIL DMA_BUFFER_MEM_SECTION g_log_file;
+static FIL DMA_BUFFER_MEM_SECTION g_wav_file;
 static bool g_log_open = false;
 
 /** Build log file path */
@@ -168,7 +169,8 @@ inline LoadStatus LoadWavFile(int z_index, const char* filename)
     
     WriteLog("  Opening file...\r\n");
     
-    FIL file;
+    // Files are loaded sequentially. Reuse a DMA-accessible file sector buffer.
+    FIL& file = g_wav_file;
     FRESULT res = f_open(&file, filename, FA_READ);
     if (res != FR_OK)
     {

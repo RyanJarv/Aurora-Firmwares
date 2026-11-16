@@ -166,8 +166,11 @@ From the same directory, run `make ram` to build with `APP_TYPE=BOOT_SRAM`.
 The RAM binary is written to `build-ram/FataMorgana.bin`. If the SDK is in a
 separate checkout, pass `AURORA_SDK_PATH=/path/to/Aurora-SDK` to `make ram`.
 
-USB host support has known issues in `BOOT_SRAM`, so custom USB wavetable
-loading may fail. The installation steps below apply to the default QSPI build.
+The upstream alpha reported USB host trouble in SRAM mode without specifying
+the failure. To confirm that FataMorgana loaded the custom wavetables, check for
+`Result: SUCCESS` in `wavetable_log.txt` on the USB drive.
+
+The installation steps below apply to the default QSPI build.
 
 ## Installation
 
